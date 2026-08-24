@@ -1,35 +1,45 @@
-import XCTest
+import Testing
 import Syntect
 
-// Smoke test for the Kotlin → Swift Export → SPM → swift test pipeline.
-//
-// The file's mere existence and successful compilation prove three layers
-// of the pipeline:
-//
-//   1. `embedSwiftExportForXcode` produced `Syntect.swiftmodule/`
-//      and the supporting KotlinRuntimeSupport / ExportedKotlinPackages /
-//      KotlinRuntime swiftmodule bundles. If any of them were missing,
-//      `import Syntect` above would fail at compile time.
-//
-//   2. The static archive `libSyntect.a` (produced by the
-//      `linkSwiftExportBinaryDebugStaticMacosArm64` and
-//      `mergeMacosDebugSwiftExportLibraries` tasks) supplied every
-//      `__root____*` and `KotlinError`-related symbol the Swift modules
-//      reference. If the archive were missing or empty, this test
-//      executable would fail to link with "undefined symbols for
-//      architecture arm64".
-//
-//   3. The Kotlin `swiftExport { moduleName = "Syntect" }` and
-//      `flattenPackage = "io.github.kotlinmania.syntect"` configuration in
-//      build.gradle.kts produced a module name that's both syntactically
-//      valid as a Swift identifier and reachable from this Package.swift
-//      via the `SyntectLibrary` product.
-//
-// Add more meaningful per-API tests below as the Swift Export surface
-// grows. For now the import + a single passing assertion is the
-// canary that the pipeline is green for this repo.
-final class SyntectExportTests: XCTestCase {
-    func testSwiftModuleLoads() throws {
-        XCTAssertTrue(true, "Syntect swift module imported cleanly")
+@Suite("Syntect Swift Export Tests")
+struct SyntectExportTests {
+    @Test("Swift module loads and verifies basic constants and operations")
+    func testModuleExports() {
+        let black = highlighting.Color.Companion.shared.BLACK
+        let white = highlighting.Color.Companion.shared.WHITE
+        #expect(black.r == 0)
+        #expect(black.g == 0)
+        #expect(black.b == 0)
+        #expect(black.a == 255)
+
+        #expect(white.r == 255)
+        #expect(white.g == 255)
+        #expect(white.b == 255)
+        #expect(white.a == 255)
+
+        let bold = highlighting.FontStyle.Companion.shared.BOLD
+        let italic = highlighting.FontStyle.Companion.shared.ITALIC
+        let empty = highlighting.FontStyle.Companion.shared.empty()
+        let all = highlighting.FontStyle.Companion.shared.all()
+
+        #expect(bold.bits == 1)
+        #expect(italic.bits == 4)
+        #expect(empty.bits == 0)
+        #expect(all.bits == 7)
+
+        let defaultStyle = highlighting.Style.Companion.shared.default()
+        #expect(defaultStyle.foreground == black)
+        #expect(defaultStyle.background == white)
+
+        let scope = parsing.Scope.Companion.shared.fromString(s: "source.kotlin")
+        #expect(scope.len() == 2)
+
+        let stack = parsing.ScopeStack.Companion.shared.fromString(s: "source.kotlin storage.type")
+        #expect(stack.len() == 2)
+        #expect(!stack.isEmpty())
+
+        let builder = parsing.SyntaxSetBuilder()
+        let syntaxSet = builder.build()
+        #expect(syntaxSet.syntaxes.isEmpty)
     }
 }
