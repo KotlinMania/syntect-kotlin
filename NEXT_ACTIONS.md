@@ -5,13 +5,13 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 23/23 (100.0%)
-- **Function parity:** 89/374 matched (target 155) — 23.8%
-- **Class/type parity:** 48/89 matched (target 96) — 53.9%
-- **Combined symbol parity:** 137/463 matched (target 251) — 29.6%
-- **Average inline-code cosine:** 0.16 (function body across 18 matched files)
-- **Average documentation cosine:** 0.44 (doc text across 18 matched files)
+- **Function parity:** 88/374 matched (target 154) — 23.5%
+- **Class/type parity:** 48/89 matched (target 106) — 53.9%
+- **Combined symbol parity:** 136/463 matched (target 260) — 29.4%
+- **Average inline-code cosine:** 0.20 (function body across 19 matched files)
+- **Average documentation cosine:** 0.42 (doc text across 19 matched files)
 - **Cheat-zeroed Files:** 9
-- **Critical Issues:** 23 files with <0.60 function similarity
+- **Critical Issues:** 22 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -42,12 +42,12 @@ Every matched file is listed below with function and type symbol parity.
 ### 2. parsing.regex
 
 - **Target:** `parsing.Regex`
-- **Similarity:** 0.21
+- **Similarity:** 0.17
 - **Dependents:** 2
-- **Priority Score:** 2101808.0
-- **Functions:** 6/16 matched
-- **Missing functions:** `regex`, `clone`, `eq`, `serialize`, `deserialize`, `default`, `new_region`, `init_from_captures`, `caches_compiled_regex`, `serde_as_string`
-- **Types:** 2/2 matched (target 3)
+- **Priority Score:** 2111808.2
+- **Functions:** 5/16 matched (target 15)
+- **Missing functions:** `regex_str`, `regex`, `clone`, `eq`, `serialize`, `deserialize`, `default`, `new_region`, `init_from_captures`, `caches_compiled_regex`, `serde_as_string`
+- **Types:** 2/2 matched (target 5)
 - **Missing types:** _none_
 - **Tests:** 0/2 matched
 
@@ -142,7 +142,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 313709.4
 - **Functions:** 2/26 matched (target 3)
 - **Missing functions:** `add_raw`, `quick_load`, `from`, `append_vars`, `merged_with_raw`, `from_raw`, `get_line_comment_marker`, `get_block_comment_markers`, `unindented_line`, `decrease_indent`, `increase_indent`, `bracket_increase`, `disable_indent_next_line`, `line_comment`, `block_comment`, `best_match`, `load`, `serialize`, `deserialize`, `load_raw`, `load_groups`, `parse_yaml_meta`, `load_shell_vars`, `indent_rust`
-- **Types:** 4/11 matched (target 4)
+- **Types:** 4/11 matched (target 6)
 - **Missing types:** `Dict`, `SelectorString`, `RawMetadataEntry`, `LoadMetadata`, `KeyPair`, `ShellVars`, `MetaSetSerializable`
 - **Tests:** 0/6 matched
 
@@ -177,19 +177,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 143106.8
 - **Functions:** 14/28 matched (target 19)
 - **Missing functions:** `new`, `parse_html_for_line`, `css_for_theme`, `highlighted_html_for_file`, `tokens_to_classed_spans`, `tokens_to_classed_html`, `tokens`, `strings`, `tricky_test_syntax`, `test_classed_html_generator_doesnt_panic`, `test_classed_html_generator_prefixed`, `test_classed_html_generator_no_empty_span`, `test_escape_css_identifier`, `test_css_for_theme_with_class_style_issue_308`
-- **Types:** 3/3 matched (target 9)
+- **Types:** 3/3 matched (target 11)
 - **Missing types:** _none_
 - **Tests:** 1/9 matched
 
 ### 14. easy
 
 - **Target:** `easy.HighlightLines`
-- **Similarity:** 0.28
+- **Similarity:** 0.27
 - **Dependents:** 0
-- **Priority Score:** 91607.2
+- **Priority Score:** 91607.3
 - **Functions:** 4/11 matched (target 10)
 - **Missing functions:** `new`, `highlight`, `can_highlight_lines`, `can_highlight_file`, `can_find_regions`, `can_find_regions_with_trailing_newline`, `can_start_again_from_previous_state`
-- **Types:** 3/5 matched (target 6)
+- **Types:** 3/5 matched (target 7)
 - **Missing types:** `HighlightFile`, `Item`
 - **Tests:** 0/5 matched
 
@@ -264,13 +264,13 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 21. lib
 
-- **Target:** `syntect.Mod [STUB]`
+- **Target:** `syntect.Mod`
 - **Similarity:** 1.00
 - **Dependents:** 0
 - **Priority Score:** 200.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
-- **Types:** 2/2 matched (target 15)
+- **Types:** 2/2 matched (target 16)
 - **Missing types:** _none_
 
 ### 22. parsing.mod
@@ -281,7 +281,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 10.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
-- **Types:** 0/0 matched
+- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ### 23. highlighting.mod
@@ -292,7 +292,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 10.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
-- **Types:** 0/0 matched
+- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ## Success Criteria
