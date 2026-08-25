@@ -77,7 +77,7 @@ class EasyTest {
         assertEquals(3, ranges.size)
         assertEquals(0 until 5, ranges[0])
         assertEquals(5 until 11, ranges[1])
-        assertEquals(11 until 11, ranges[2])
+        assertEquals(IntRange(11, 10), ranges[2])
     }
 
     @Test
