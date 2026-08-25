@@ -87,6 +87,8 @@ class Regex(
         return newRegex
     }
 
+    fun isCompiled(): Boolean = compiledRegex != null
+
     /**
      * Check if the regex matches the given text.
      */

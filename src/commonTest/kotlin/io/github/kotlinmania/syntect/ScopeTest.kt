@@ -17,7 +17,12 @@ import kotlin.test.assertTrue
 
 class ScopeTest {
     @Test
-    fun testRepoWorks() {
+    fun misc() {
+        assertEquals(Scope.new("source.php"), Scope.new("source.php"))
+    }
+
+    @Test
+    fun repoWorks() {
         val repo = ScopeRepository()
         assertEquals(repo.build("source.php"), repo.build("source.php"))
         assertEquals(
@@ -38,7 +43,7 @@ class ScopeTest {
     }
 
     @Test
-    fun testGlobalRepoWorks() {
+    fun globalRepoWorks() {
         assertEquals(Scope.new("source.php"), Scope.new("source.php"))
         assertEquals(Scope.fromString("1.2.3.4.5.6.7.8").len(), 8)
         assertFailsWith<ScopeException> {
@@ -47,7 +52,7 @@ class ScopeTest {
     }
 
     @Test
-    fun testPrefixesWork() {
+    fun prefixesWork() {
         assertTrue(Scope.new("1.2.3.4.5.6.7.8").isPrefixOf(Scope.new("1.2.3.4.5.6.7.8")))
         assertTrue(Scope.new("1.2.3.4.5.6").isPrefixOf(Scope.new("1.2.3.4.5.6.7.8")))
         assertTrue(Scope.new("1.2.3.4").isPrefixOf(Scope.new("1.2.3.4.5.6.7.8")))
@@ -58,7 +63,7 @@ class ScopeTest {
     }
 
     @Test
-    fun testMatchingWorks() {
+    fun matchingWorks() {
         assertEquals(
             MatchPower(1.0),
             ScopeStack

@@ -11,7 +11,7 @@ import kotlin.test.assertNull
 
 class SelectorTest {
     @Test
-    fun testSelectorsWork() {
+    fun selectorsWork() {
         val sels =
             ScopeSelectors.fromString(
                 "source.php meta.preprocessor - string.quoted, source string",
@@ -31,7 +31,7 @@ class SelectorTest {
     }
 
     @Test
-    fun testMatchingWorks() {
+    fun matchingWorks() {
         // 0o20 in octal = 16
         assertEquals(
             MatchPower(16.0),
@@ -77,7 +77,7 @@ class SelectorTest {
     }
 
     @Test
-    fun testEmptyStackMatchingWorks() {
+    fun emptyStackMatchingWorks() {
         assertNull(
             ScopeSelector
                 .fromString(" - a.b")
@@ -94,6 +94,38 @@ class SelectorTest {
             ScopeSelector
                 .fromString("")
                 .doesMatch(ScopeStack.fromString("").asSlice()),
+        )
+    }
+
+    @Test
+    fun multipleExcludesMatchingWorks() {
+        assertNull(
+            ScopeSelector
+                .fromString(" - a.b - c.d")
+                .doesMatch(ScopeStack.fromString("a.b c.d j e.f").asSlice()),
+        )
+        assertEquals(
+            MatchPower(1.0),
+            ScopeSelector
+                .fromString(" - a.b - c.d")
+                .doesMatch(ScopeStack.fromString("").asSlice()),
+        )
+        assertNull(
+            ScopeSelector
+                .fromString("a.b - c.d -e.f")
+                .doesMatch(ScopeStack.fromString("").asSlice()),
+        )
+        assertEquals(
+            MatchPower(2.0),
+            ScopeSelector
+                .fromString("a.b")
+                .doesMatch(ScopeStack.fromString("a.b c.d j e.f").asSlice()),
+        )
+        assertEquals(
+            MatchPower(2.0),
+            ScopeSelector
+                .fromString("a.b -g.h - h.i")
+                .doesMatch(ScopeStack.fromString("a.b c.d j e.f").asSlice()),
         )
     }
 }
