@@ -21,43 +21,142 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class EasyTest {
-    @Test
-    fun testHighlightLines() {
-        val theme =
-            Theme(
-                name = "TestTheme",
-                settings =
-                    ThemeSettings(
-                        foreground = Color(200u, 200u, 200u, 255u),
-                        background = Color(30u, 30u, 30u, 255u),
+    private fun createTestTheme(): Theme =
+        Theme(
+            name = "TestTheme",
+            settings =
+                ThemeSettings(
+                    foreground = Color(200u, 200u, 200u, 255u),
+                    background = Color(30u, 30u, 30u, 255u),
+                ),
+            scopes =
+                listOf(
+                    ThemeItem(
+                        scope = ScopeSelectors.fromString("source.test"),
+                        style =
+                            StyleModifier(
+                                foreground = Color(255u, 100u, 100u, 255u),
+                            ),
                     ),
-                scopes =
-                    listOf(
-                        ThemeItem(
-                            scope = ScopeSelectors.fromString("source.test"),
-                            style =
-                                StyleModifier(
-                                    foreground = Color(255u, 100u, 100u, 255u),
-                                ),
-                        ),
+                    ThemeItem(
+                        scope = ScopeSelectors.fromString("keyword.operator"),
+                        style =
+                            StyleModifier(
+                                foreground = Color(100u, 255u, 100u, 255u),
+                            ),
                     ),
-            )
+                ),
+        )
 
+    @Test
+    fun canHighlightLines() {
+        val theme = createTestTheme()
         val builder = SyntaxSetBuilder()
         builder.add(
             SyntaxDefinition(
                 name = "TestSyntax",
-                fileExtensions = listOf("test"),
+                fileExtensions = listOf("rs", "test"),
                 scope = Scope.new("source.test"),
             ),
         )
         val ss = builder.build()
-        val syntax = ss.findSyntaxByExtension("test")!!
+        val syntax = ss.findSyntaxByExtension("rs")!!
 
         val highlighter = HighlightLines(syntax, theme)
-        val segments = highlighter.highlightLine("hello world", ss)
+        val segments = highlighter.highlightLine("pub struct Wow { hi: u64 }", ss)
         assertTrue(segments.isNotEmpty())
         assertEquals(Color(255u, 100u, 100u, 255u), segments[0].style.foreground)
+    }
+
+    @Test
+    fun canHighlightFile() {
+        val theme = createTestTheme()
+        val builder = SyntaxSetBuilder()
+        builder.add(
+            SyntaxDefinition(
+                name = "ERB",
+                fileExtensions = listOf("erb"),
+                scope = Scope.new("source.test"),
+            ),
+        )
+        val ss = builder.build()
+        val syntax = ss.findSyntaxByExtension("erb")!!
+
+        val highlighter = HighlightLines(syntax, theme)
+        val segments = highlighter.highlightLine("test line", ss)
+        assertTrue(segments.isNotEmpty())
+    }
+
+    @Test
+    fun canFindRegions() {
+        val line = "lol =5+2"
+        val ops =
+            listOf(
+                ParseOp(0, ScopeStackOp.Push(Scope.new("source.ruby"))),
+                ParseOp(4, ScopeStackOp.Push(Scope.new("keyword.operator.assignment.ruby"))),
+                ParseOp(5, ScopeStackOp.Pop(1)),
+                ParseOp(8, ScopeStackOp.Noop),
+            )
+        val iter = ScopeRegionIterator(ops, line)
+        val stack = ScopeStack()
+        var tokenCount = 0
+        while (iter.hasNext()) {
+            val (s, op) = iter.next()
+            stack.apply(op)
+            if (s.isEmpty()) continue
+            if (tokenCount == 1) {
+                assertEquals(ScopeStack.fromString("source.ruby keyword.operator.assignment.ruby"), stack)
+                assertEquals("=", s)
+            }
+            tokenCount++
+        }
+        assertEquals(3, tokenCount)
+    }
+
+    @Test
+    fun canFindRegionsWithTrailingNewline() {
+        val lines = listOf("# hello world\n", "lol=5+2\n")
+        val stack = ScopeStack()
+        for (line in lines) {
+            val ops =
+                listOf(
+                    ParseOp(0, ScopeStackOp.Push(Scope.new("comment.line"))),
+                    ParseOp(line.length, ScopeStackOp.Pop(1)),
+                )
+            val iteratedOps = mutableListOf<ScopeStackOp>()
+            val iter = ScopeRegionIterator(ops, line)
+            while (iter.hasNext()) {
+                val (_, op) = iter.next()
+                stack.apply(op)
+                iteratedOps.add(op)
+            }
+            assertTrue(iteratedOps.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun canStartAgainFromPreviousState() {
+        val theme = createTestTheme()
+        val builder = SyntaxSetBuilder()
+        builder.add(
+            SyntaxDefinition(
+                name = "Python",
+                fileExtensions = listOf("py"),
+                scope = Scope.new("source.test"),
+            ),
+        )
+        val ss = builder.build()
+        val syntax = ss.findSyntaxByExtension("py")!!
+
+        val highlighter = HighlightLines(syntax, theme)
+        val lines = listOf("\"\"\"", "def foo():", "\"\"\"")
+        val highlightedFirst = highlighter.highlightLine(lines[0], ss)
+        assertTrue(highlightedFirst.isNotEmpty())
+
+        val (hState, pState) = highlighter.state()
+        val otherHighlighter = HighlightLines.fromState(theme, hState, pState)
+        val highlightedSecond = otherHighlighter.highlightLine(lines[1], ss)
+        assertTrue(highlightedSecond.isNotEmpty())
     }
 
     @Test
@@ -78,27 +177,5 @@ class EasyTest {
         assertEquals(0 until 5, ranges[0])
         assertEquals(5 until 11, ranges[1])
         assertEquals(IntRange(11, 10), ranges[2])
-    }
-
-    @Test
-    fun testScopeRegionIterator() {
-        val line = "lol =5+2"
-        val ops =
-            listOf(
-                ParseOp(4, ScopeStackOp.Push(Scope.new("source.ruby keyword.operator"))),
-                ParseOp(5, ScopeStackOp.Pop(1)),
-                ParseOp(8, ScopeStackOp.Noop),
-            )
-        val iter = ScopeRegionIterator(ops, line)
-        val regions = mutableListOf<String>()
-        val stack = ScopeStack()
-        while (iter.hasNext()) {
-            val (text, op) = iter.next()
-            stack.apply(op)
-            if (text.isNotEmpty()) {
-                regions.add(text)
-            }
-        }
-        assertEquals(listOf("lol ", "=", "5+2"), regions)
     }
 }

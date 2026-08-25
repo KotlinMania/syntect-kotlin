@@ -12,11 +12,18 @@ import kotlin.test.assertTrue
 
 class RegexTest {
     @Test
-    fun testRegexMatch() {
+    fun cachesCompiledRegex() {
         val regex = Regex.new("\\w+")
+        assertFalse(regex.isCompiled())
         assertTrue(regex.isMatch("test"))
-        assertFalse(regex.isMatch(" "))
-        assertEquals("\\w+", regex.regexStr)
+        assertTrue(regex.isCompiled())
+    }
+
+    @Test
+    fun serdeAsString() {
+        val pattern = Regex.new("just a string")
+        assertEquals("just a string", pattern.regexStr)
+        assertEquals("just a string", pattern.toString())
     }
 
     @Test

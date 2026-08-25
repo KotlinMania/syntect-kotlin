@@ -33,18 +33,7 @@ class UtilTest {
     }
 
     @Test
-    fun testBlendFgColor() {
-        val opaqueFg = Color(255u, 0u, 0u, 255u)
-        val bg = Color(0u, 0u, 255u, 255u)
-        assertEquals(opaqueFg, blendFgColor(opaqueFg, bg))
-
-        val halfAlphaFg = Color(255u, 0u, 0u, 127u)
-        val blended = blendFgColor(halfAlphaFg, bg)
-        assertEquals(255u.toUByte(), blended.a)
-    }
-
-    @Test
-    fun testSplitAtAndModifyRange() {
+    fun testSplitAt() {
         val plain = Style.default()
         val boldMod =
             StyleModifier(
@@ -80,5 +69,16 @@ class UtilTest {
         assertTrue(escaped.contains("\u001B[48;2;0;0;0m"))
         assertTrue(escaped.contains("\u001B[38;2;255;0;0m"))
         assertTrue(escaped.contains("test"))
+    }
+
+    @Test
+    fun testBlendFgColor() {
+        val opaqueFg = Color(255u, 0u, 0u, 255u)
+        val bg = Color(0u, 0u, 255u, 255u)
+        assertEquals(opaqueFg, blendFgColor(opaqueFg, bg))
+
+        val halfAlphaFg = Color(255u, 0u, 0u, 127u)
+        val blended = blendFgColor(halfAlphaFg, bg)
+        assertEquals(255u.toUByte(), blended.a)
     }
 }
