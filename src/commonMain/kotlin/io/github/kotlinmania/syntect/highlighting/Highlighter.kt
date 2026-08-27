@@ -1,4 +1,4 @@
-// port-lint: source highlighting/highlighter.rs
+// port-lint: source syntect/src/highlighting/highlighter.rs
 package io.github.kotlinmania.syntect.highlighting
 
 import io.github.kotlinmania.syntect.parsing.ATOM_LEN_BITS

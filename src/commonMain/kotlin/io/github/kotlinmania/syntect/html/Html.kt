@@ -1,4 +1,4 @@
-// port-lint: source html.rs
+// port-lint: source syntect/src/html.rs
 package io.github.kotlinmania.syntect.html
 
 import io.github.kotlinmania.syntect.easy.HighlightLines

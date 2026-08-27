@@ -1,4 +1,4 @@
-// port-lint: tests parsing/parser.rs
+// port-lint: tests syntect/src/parsing/parser.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.parsing.ParseOp

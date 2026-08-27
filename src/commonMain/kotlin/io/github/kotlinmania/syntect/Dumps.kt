@@ -1,4 +1,4 @@
-// port-lint: source dumps.rs
+// port-lint: source syntect/src/dumps.rs
 package io.github.kotlinmania.syntect
 
 /**

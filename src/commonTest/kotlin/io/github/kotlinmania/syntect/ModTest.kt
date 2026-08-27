@@ -1,4 +1,4 @@
-// port-lint: tests lib.rs
+// port-lint: tests syntect/src/lib.rs
 package io.github.kotlinmania.syntect
 
 import kotlin.test.Test

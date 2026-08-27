@@ -1,4 +1,4 @@
-// port-lint: tests highlighting/selector.rs
+// port-lint: tests syntect/src/highlighting/selector.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.highlighting.ScopeSelector
