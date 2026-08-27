@@ -1,4 +1,4 @@
-// port-lint: tests highlighting/style.rs
+// port-lint: tests syntect/src/highlighting/style.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.highlighting.Color
