@@ -8,7 +8,6 @@ import io.github.kotlinmania.syntect.parsing.SyntaxDefinition
 import io.github.kotlinmania.syntect.parsing.SyntaxSetBuilder
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class DumpsTest {

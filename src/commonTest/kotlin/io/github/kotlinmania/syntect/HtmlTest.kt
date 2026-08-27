@@ -140,11 +140,12 @@ class HtmlTest {
         val ss = builder.build()
         val syntax = ss.findSyntaxByExtension("r")!!
 
-        val generator = ClassedHTMLGenerator.newWithClassStyle(
-            syntax,
-            ss,
-            ClassStyle.SpacedPrefixed("foo-"),
-        )
+        val generator =
+            ClassedHTMLGenerator.newWithClassStyle(
+                syntax,
+                ss,
+                ClassStyle.SpacedPrefixed("foo-"),
+            )
         generator.parseHtmlForLineWhichIncludesNewline("x + y\n")
         val html = generator.finalize()
         assertTrue(html.contains("x + y\n"))
