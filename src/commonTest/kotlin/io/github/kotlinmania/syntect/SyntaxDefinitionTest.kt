@@ -25,20 +25,22 @@ class SyntaxDefinitionTest {
 
     @Test
     fun testSyntaxDefinitionData() {
-        val def = SyntaxDefinition(
-            name = "Kotlin",
-            fileExtensions = listOf("kt", "kts"),
-            scope = Scope.new("source.kotlin"),
-        )
+        val def =
+            SyntaxDefinition(
+                name = "Kotlin",
+                fileExtensions = listOf("kt", "kts"),
+                scope = Scope.new("source.kotlin"),
+            )
         assertEquals("Kotlin", def.name)
         assertEquals(listOf("kt", "kts"), def.fileExtensions)
         assertEquals(Scope.new("source.kotlin"), def.scope)
 
-        val ref = SyntaxReference(
-            name = "Kotlin",
-            fileExtensions = listOf("kt", "kts"),
-            scope = Scope.new("source.kotlin"),
-        )
+        val ref =
+            SyntaxReference(
+                name = "Kotlin",
+                fileExtensions = listOf("kt", "kts"),
+                scope = Scope.new("source.kotlin"),
+            )
         assertEquals("Kotlin", ref.name)
 
         val contextId = ContextId(1, 2)
