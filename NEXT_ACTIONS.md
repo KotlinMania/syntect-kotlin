@@ -4,12 +4,12 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 23/39 (59.0%)
-- **Function parity:** 198/422 matched (target 266) — 46.9%
-- **Class/type parity:** 48/97 matched (target 114) — 49.5%
-- **Combined symbol parity:** 246/519 matched (target 380) — 47.4%
-- **Average inline-code cosine:** 0.25 (function body across 18 matched files)
-- **Average documentation cosine:** 0.43 (doc text across 18 matched files)
+- **Files Present:** 23/23 (100.0%)
+- **Function parity:** 198/374 matched (target 266) — 52.9%
+- **Class/type parity:** 48/89 matched (target 114) — 53.9%
+- **Combined symbol parity:** 246/463 matched (target 380) — 53.1%
+- **Average inline-code cosine:** 0.23 (function body across 19 matched files)
+- **Average documentation cosine:** 0.42 (doc text across 19 matched files)
 - **Cheat-zeroed Files:** 7
 - **Critical Issues:** 23 files with <0.60 function similarity
 
@@ -31,39 +31,39 @@ Every matched file is listed below with function and type symbol parity.
 
 - **Target:** `parsing.SyntaxSet`
 - **Similarity:** 0.26
-- **Dependents:** 9
-- **Priority Score:** 9356207.0
+- **Dependents:** 4
+- **Priority Score:** 4356207.5
 - **Functions:** 25/57 matched (target 32)
 - **Missing functions:** `load_syntax_file`, `clone`, `default`, `load_from_folder`, `syntaxes`, `set_metadata`, `metadata`, `find_syntax_for_file`, `find_syntax_plain_text`, `into_builder`, `get_context`, `first_line_cache`, `find_unlinked_contexts`, `find_unlinked_contexts_in_context`, `context_ids`, `contexts`, `lazy_contexts`, `deserialize`, `add_plain_text_syntax`, `add_from_folder`, `recursively_mark_no_prototype`, `link_context`, `link_ref`, `with_plain_text_fallback`, `find_id`, `link_match_pat`, `assert_ops_contain`, `assert_prototype_only_on`, `check_send`, `check_sync`, `syntax_a`, `syntax_b`
 - **Types:** 2/5 matched (target 4)
 - **Missing types:** `SyntaxReference`, `LazyContexts`, `FirstLineCache`
 - **Tests:** 16/22 matched
 
-### 2. highlighting.theme_set
-
-- **Target:** `highlighting.ThemeSet`
-- **Similarity:** 0.22
-- **Dependents:** 6
-- **Priority Score:** 6040808.0
-- **Functions:** 3/7 matched (target 4)
-- **Missing functions:** `discover_theme_paths`, `load_from_reader`, `load_from_folder`, `add_from_folder`
-- **Types:** 1/1 matched (target 2)
-- **Missing types:** _none_
-- **Tests:** 1/1 matched
-
-### 3. parsing.regex
+### 2. parsing.regex
 
 - **Target:** `parsing.Regex`
 - **Similarity:** 0.23
-- **Dependents:** 3
-- **Priority Score:** 3091807.8
+- **Dependents:** 2
+- **Priority Score:** 2091807.8
 - **Functions:** 7/16 matched (target 17)
 - **Missing functions:** `regex_str`, `regex`, `clone`, `eq`, `serialize`, `deserialize`, `default`, `new_region`, `init_from_captures`
 - **Types:** 2/2 matched (target 5)
 - **Missing types:** _none_
 - **Tests:** 2/2 matched
 
-### 4. syntect.escape
+### 3. highlighting.theme_set
+
+- **Target:** `highlighting.ThemeSet`
+- **Similarity:** 0.22
+- **Dependents:** 2
+- **Priority Score:** 2040807.9
+- **Functions:** 3/7 matched (target 4)
+- **Missing functions:** `discover_theme_paths`, `load_from_reader`, `load_from_folder`, `add_from_folder`
+- **Types:** 1/1 matched (target 2)
+- **Missing types:** _none_
+- **Tests:** 1/1 matched
+
+### 4. escape
 
 - **Target:** `escape.Escape`
 - **Similarity:** 0.00
@@ -74,18 +74,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 5. highlighting.theme
-
-- **Target:** `highlighting.Theme [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 2
-- **Priority Score:** 2000410.0
-- **Functions:** 0/0 matched (target 1)
-- **Missing functions:** _none_
-- **Types:** 4/4 matched
-- **Missing types:** _none_
-
-### 6. parsing.syntax_definition
+### 5. parsing.syntax_definition
 
 - **Target:** `parsing.SyntaxDefinition`
 - **Similarity:** 0.05
@@ -97,7 +86,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `CaptureMapping`, `Context`, `Pattern`, `MatchIter`, `MatchPattern`, `ContextReference`, `MatchOperation`, `Item`
 - **Tests:** 1/1 matched
 
-### 7. parsing.scope
+### 6. parsing.scope
 
 - **Target:** `parsing.Scope`
 - **Similarity:** 0.48
@@ -108,6 +97,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 9/12 matched (target 17)
 - **Missing types:** `Err`, `ScopeVisitor`, `Value`
 - **Tests:** 5/5 matched
+
+### 7. highlighting.theme
+
+- **Target:** `highlighting.Theme [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 1
+- **Priority Score:** 1000410.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 4/4 matched
+- **Missing types:** _none_
 
 ### 8. parsing.yaml_load
 
@@ -157,7 +157,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Tests:** 41/48 matched
 - **Lint issues:** 1
 
-### 12. syntect.dumps
+### 12. dumps
 
 - **Target:** `syntect.Dumps [STUB]`
 - **Similarity:** 0.09
@@ -169,7 +169,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 3/3 matched
 
-### 13. syntect.util
+### 13. util
 
 - **Target:** `util.Util`
 - **Similarity:** 0.38
@@ -181,7 +181,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `LinesWithEndings`, `Item`
 - **Tests:** 3/4 matched
 
-### 14. syntect.html
+### 14. html
 
 - **Target:** `html.Html`
 - **Similarity:** 0.44
@@ -193,7 +193,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 9/9 matched
 
-### 15. syntect.easy
+### 15. easy
 
 - **Target:** `easy.HighlightLines`
 - **Similarity:** 0.47
@@ -251,7 +251,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`
 - **Tests:** 4/4 matched
 
-### 20. syntect.utils
+### 20. utils
 
 - **Target:** `util.Utils [STUB]`
 - **Similarity:** 0.00
@@ -262,9 +262,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 21. syntect.lib
+### 21. lib
 
-- **Target:** `syntect.Mod [STUB]`
+- **Target:** `syntect.Mod [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 210.0

@@ -1,4 +1,4 @@
-// port-lint: tests syntect/src/parsing/scope.rs
+// port-lint: tests parsing/scope.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.parsing.BasicScopeStackOp
