@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/escape.rs
+// port-lint: source escape.rs
 package io.github.kotlinmania.syntect.escape
 
 /**

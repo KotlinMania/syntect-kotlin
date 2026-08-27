@@ -1,4 +1,4 @@
-// port-lint: tests syntect/src/parsing/yaml_load.rs
+// port-lint: tests parsing/yaml_load.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.parsing.Regex

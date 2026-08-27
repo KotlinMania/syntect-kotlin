@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/highlighting/style.rs
+// port-lint: source highlighting/style.rs
 package io.github.kotlinmania.syntect.highlighting
 
 import io.github.kotlinmania.syntect.ThemeException

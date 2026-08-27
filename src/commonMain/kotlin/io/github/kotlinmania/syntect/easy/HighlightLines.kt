@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/easy.rs
+// port-lint: source easy.rs
 package io.github.kotlinmania.syntect.easy
 
 import io.github.kotlinmania.syntect.highlighting.HighlightIterator
