@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 23/23 (100.0%)
-- **Function parity:** 198/374 matched (target 266) — 52.9%
-- **Class/type parity:** 48/89 matched (target 114) — 53.9%
-- **Combined symbol parity:** 246/463 matched (target 380) — 53.1%
+- **Function parity:** 198/374 matched (target 263) — 52.9%
+- **Class/type parity:** 42/83 matched (target 91) — 50.6%
+- **Combined symbol parity:** 240/457 matched (target 354) — 52.5%
 - **Average inline-code cosine:** 0.23 (function body across 19 matched files)
 - **Average documentation cosine:** 0.42 (doc text across 19 matched files)
-- **Cheat-zeroed Files:** 7
+- **Cheat-zeroed Files:** 3
 - **Critical Issues:** 23 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -98,18 +98,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`, `ScopeVisitor`, `Value`
 - **Tests:** 5/5 matched
 
-### 7. highlighting.theme
-
-- **Target:** `highlighting.Theme [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 1
-- **Priority Score:** 1000410.0
-- **Functions:** 0/0 matched (target 1)
-- **Missing functions:** _none_
-- **Types:** 4/4 matched
-- **Missing types:** _none_
-
-### 8. parsing.yaml_load
+### 7. parsing.yaml_load
 
 - **Target:** `parsing.YamlLoad`
 - **Similarity:** 0.14
@@ -121,7 +110,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `ParserState`, `ContextNamer`, `RegexRewriterForNewlines`, `RegexRewriterForNoNewlines`, `ConsumingCaptureIndexParser`, `Parser`
 - **Tests:** 13/13 matched
 
-### 9. parsing.metadata
+### 8. parsing.metadata
 
 - **Target:** `parsing.Metadata`
 - **Similarity:** 0.14
@@ -133,7 +122,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Dict`, `SelectorString`, `RawMetadataEntry`, `LoadMetadata`, `KeyPair`, `ShellVars`, `MetaSetSerializable`
 - **Tests:** 5/6 matched
 
-### 10. highlighting.style
+### 9. highlighting.style
 
 - **Target:** `highlighting.Style`
 - **Similarity:** 0.21
@@ -144,7 +133,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 4/5 matched (target 6)
 - **Missing types:** `Output`
 
-### 11. parsing.parser
+### 10. parsing.parser
 
 - **Target:** `parsing.Parser`
 - **Similarity:** 0.34
@@ -157,7 +146,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Tests:** 41/48 matched
 - **Lint issues:** 1
 
-### 12. dumps
+### 11. dumps
 
 - **Target:** `syntect.Dumps [STUB]`
 - **Similarity:** 0.09
@@ -169,7 +158,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 3/3 matched
 
-### 13. util
+### 12. util
 
 - **Target:** `util.Util`
 - **Similarity:** 0.38
@@ -181,7 +170,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `LinesWithEndings`, `Item`
 - **Tests:** 3/4 matched
 
-### 14. html
+### 13. html
 
 - **Target:** `html.Html`
 - **Similarity:** 0.44
@@ -193,7 +182,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 9/9 matched
 
-### 15. easy
+### 14. easy
 
 - **Target:** `easy.HighlightLines`
 - **Similarity:** 0.47
@@ -205,7 +194,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `HighlightFile`, `Item`
 - **Tests:** 5/5 matched
 
-### 16. highlighting.theme_load
+### 15. highlighting.theme_load
 
 - **Target:** `highlighting.ThemeLoad [ZERO]`
 - **Similarity:** 0.00
@@ -216,7 +205,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `Err`, `Error`
 
-### 17. highlighting.settings
+### 16. highlighting.settings
 
 - **Target:** `highlighting.Settings [ZERO]`
 - **Similarity:** 0.00
@@ -227,7 +216,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `ParseSettings`
 
-### 18. highlighting.highlighter
+### 17. highlighting.highlighter
 
 - **Target:** `highlighting.Highlighter`
 - **Similarity:** 0.58
@@ -239,7 +228,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Item`
 - **Tests:** 4/4 matched
 
-### 19. highlighting.selector
+### 18. highlighting.selector
 
 - **Target:** `highlighting.Selector`
 - **Similarity:** 0.52
@@ -251,7 +240,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`
 - **Tests:** 4/4 matched
 
-### 20. utils
+### 19. utils
 
 - **Target:** `util.Utils [STUB]`
 - **Similarity:** 0.00
@@ -259,39 +248,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 10110.0
 - **Functions:** 0/1 matched (target 0)
 - **Missing functions:** `walk_dir`
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 21. lib
-
-- **Target:** `syntect.Mod [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 210.0
-- **Functions:** 0/0 matched (target 2)
-- **Missing functions:** _none_
-- **Types:** 2/2 matched (target 17)
-- **Missing types:** _none_
-
-### 22. parsing.mod
-
-- **Target:** `parsing.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 23. highlighting.mod
-
-- **Target:** `highlighting.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
@@ -303,4 +259,20 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `highlighting.theme` | `highlighting.Theme` | `highlighting/theme` |
+| `lib` | `syntect.Mod` | `lib` |
+| `parsing.mod` | `parsing.Mod` | `parsing/mod` |
+| `highlighting.mod` | `highlighting.Mod` | `highlighting/mod` |
 
