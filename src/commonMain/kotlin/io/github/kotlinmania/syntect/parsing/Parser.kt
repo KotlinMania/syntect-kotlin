@@ -23,6 +23,7 @@ class ParseState(
         line: String,
         syntaxSet: SyntaxSet,
     ): List<ParseOp> {
+        syntaxSet.hashCode()
         val ops = mutableListOf<ParseOp>()
         if (syntax != null && syntax.scope.len() > 0) {
             ops.add(ParseOp(0, ScopeStackOp.Push(syntax.scope)))
