@@ -1,4 +1,4 @@
-// port-lint: source parsing/mod.rs
+// port-lint: source syntect/src/parsing/mod.rs
 package io.github.kotlinmania.syntect.parsing
 
 /**

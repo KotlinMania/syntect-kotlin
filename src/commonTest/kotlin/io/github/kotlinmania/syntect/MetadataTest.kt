@@ -1,4 +1,4 @@
-// port-lint: tests parsing/metadata.rs
+// port-lint: tests syntect/src/parsing/metadata.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.highlighting.ScopeSelectors

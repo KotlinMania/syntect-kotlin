@@ -1,4 +1,4 @@
-// port-lint: tests easy.rs
+// port-lint: tests syntect/src/easy.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.easy.HighlightLines
