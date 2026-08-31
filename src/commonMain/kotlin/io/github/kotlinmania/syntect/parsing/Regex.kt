@@ -1,4 +1,4 @@
-// port-lint: source parsing/regex.rs
+// port-lint: source syntect/src/parsing/regex.rs
 package io.github.kotlinmania.syntect.parsing
 
 /**
