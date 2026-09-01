@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/parsing/syntax_set.rs
+// port-lint: source parsing/syntax_set.rs
 package io.github.kotlinmania.syntect.parsing
 import kotlin.text.Regex
 

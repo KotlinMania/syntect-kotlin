@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/highlighting/selector.rs
+// port-lint: source highlighting/selector.rs
 package io.github.kotlinmania.syntect.highlighting
 
 import io.github.kotlinmania.syntect.parsing.MatchPower

@@ -1,4 +1,4 @@
-// port-lint: tests syntect/src/dumps.rs
+// port-lint: tests dumps.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.highlighting.Theme

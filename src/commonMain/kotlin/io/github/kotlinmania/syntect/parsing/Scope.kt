@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/parsing/scope.rs
+// port-lint: source parsing/scope.rs
 package io.github.kotlinmania.syntect.parsing
 
 import io.github.kotlinmania.syntect.ScopeException
