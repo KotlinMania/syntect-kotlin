@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 23/23 (100.0%)
-- **Function parity:** 198/374 matched (target 263) — 52.9%
-- **Class/type parity:** 42/83 matched (target 91) — 50.6%
-- **Combined symbol parity:** 240/457 matched (target 354) — 52.5%
+- **Files Present:** 23/39 (59.0%)
+- **Function parity:** 198/422 matched (target 264) — 46.9%
+- **Class/type parity:** 46/95 matched (target 97) — 48.4%
+- **Combined symbol parity:** 244/517 matched (target 361) — 47.2%
 - **Average inline-code cosine:** 0.25 (function body across 18 matched files)
 - **Average documentation cosine:** 0.43 (doc text across 18 matched files)
-- **Cheat-zeroed Files:** 3
+- **Cheat-zeroed Files:** 6
 - **Critical Issues:** 23 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -29,58 +29,43 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. parsing.syntax_set
 
-- **Target:** `parsing.SyntaxSet [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.SyntaxSet`
 - **Similarity:** 0.26
-- **Dependents:** 4
-- **Priority Score:** 4356207.5
+- **Dependents:** 9
+- **Priority Score:** 9356207.0
 - **Functions:** 25/57 matched (target 32)
 - **Missing functions:** `load_syntax_file`, `clone`, `default`, `load_from_folder`, `syntaxes`, `set_metadata`, `metadata`, `find_syntax_for_file`, `find_syntax_plain_text`, `into_builder`, `get_context`, `first_line_cache`, `find_unlinked_contexts`, `find_unlinked_contexts_in_context`, `context_ids`, `contexts`, `lazy_contexts`, `deserialize`, `add_plain_text_syntax`, `add_from_folder`, `recursively_mark_no_prototype`, `link_context`, `link_ref`, `with_plain_text_fallback`, `find_id`, `link_match_pat`, `assert_ops_contain`, `assert_prototype_only_on`, `check_send`, `check_sync`, `syntax_a`, `syntax_b`
 - **Types:** 2/5 matched (target 4)
 - **Missing types:** `SyntaxReference`, `LazyContexts`, `FirstLineCache`
 - **Tests:** 16/22 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/syntax_set.rs` vs expected `parsing/syntax_set.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/syntax_set.rs` vs expected `parsing/syntax_set.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/syntax_set.rs` (current: `// port-lint: source syntect/src/parsing/syntax_set.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/syntax_set.rs` (current: `// port-lint: tests syntect/src/parsing/syntax_set.rs`)
-- **Lint issues:** 2
 
-### 2. parsing.regex
+### 2. highlighting.theme_set
 
-- **Target:** `parsing.Regex [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.23
-- **Dependents:** 2
-- **Priority Score:** 2091807.8
-- **Functions:** 7/16 matched (target 17)
-- **Missing functions:** `regex_str`, `regex`, `clone`, `eq`, `serialize`, `deserialize`, `default`, `new_region`, `init_from_captures`
-- **Types:** 2/2 matched (target 5)
-- **Missing types:** _none_
-- **Tests:** 2/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/regex.rs` vs expected `parsing/regex.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/regex.rs` vs expected `parsing/regex.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/regex.rs` (current: `// port-lint: source syntect/src/parsing/regex.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/regex.rs` (current: `// port-lint: tests syntect/src/parsing/regex.rs`)
-- **Lint issues:** 2
-
-### 3. highlighting.theme_set
-
-- **Target:** `highlighting.ThemeSet [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.ThemeSet`
 - **Similarity:** 0.22
-- **Dependents:** 2
-- **Priority Score:** 2040807.9
+- **Dependents:** 6
+- **Priority Score:** 6040808.0
 - **Functions:** 3/7 matched (target 4)
 - **Missing functions:** `discover_theme_paths`, `load_from_reader`, `load_from_folder`, `add_from_folder`
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 - **Tests:** 1/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/theme_set.rs` vs expected `highlighting/theme_set.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/highlighting/theme_set.rs` vs expected `highlighting/theme_set.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/theme_set.rs` (current: `// port-lint: source syntect/src/highlighting/theme_set.rs`)
-- **Proposed provenance header:** `// port-lint: tests highlighting/theme_set.rs` (current: `// port-lint: tests syntect/src/highlighting/theme_set.rs`)
-- **Lint issues:** 2
 
-### 4. escape
+### 3. parsing.regex
 
-- **Target:** `escape.Escape [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.Regex`
+- **Similarity:** 0.23
+- **Dependents:** 3
+- **Priority Score:** 3091807.8
+- **Functions:** 7/16 matched (target 17)
+- **Missing functions:** `regex_str`, `regex`, `clone`, `eq`, `serialize`, `deserialize`, `default`, `new_region`, `init_from_captures`
+- **Types:** 2/2 matched (target 5)
+- **Missing types:** _none_
+- **Tests:** 2/2 matched
+
+### 4. syntect.escape
+
+- **Target:** `escape.Escape`
 - **Similarity:** 0.00
 - **Dependents:** 2
 - **Priority Score:** 2010210.0
@@ -88,15 +73,21 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt`
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/escape.rs` vs expected `escape.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/escape.rs` vs expected `escape.rs`
-- **Proposed provenance header:** `// port-lint: source escape.rs` (current: `// port-lint: source syntect/src/escape.rs`)
-- **Proposed provenance header:** `// port-lint: tests escape.rs` (current: `// port-lint: tests syntect/src/escape.rs`)
-- **Lint issues:** 2
 
-### 5. parsing.syntax_definition
+### 5. highlighting.theme
 
-- **Target:** `parsing.SyntaxDefinition [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.Theme [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 2
+- **Priority Score:** 2000410.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 4/4 matched
+- **Missing types:** _none_
+
+### 6. parsing.syntax_definition
+
+- **Target:** `parsing.SyntaxDefinition`
 - **Similarity:** 0.05
 - **Dependents:** 1
 - **Priority Score:** 1182109.5
@@ -105,15 +96,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/10 matched (target 4)
 - **Missing types:** `CaptureMapping`, `Context`, `Pattern`, `MatchIter`, `MatchPattern`, `ContextReference`, `MatchOperation`, `Item`
 - **Tests:** 1/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/syntax_definition.rs` vs expected `parsing/syntax_definition.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/syntax_definition.rs` vs expected `parsing/syntax_definition.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/syntax_definition.rs` (current: `// port-lint: source syntect/src/parsing/syntax_definition.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/syntax_definition.rs` (current: `// port-lint: tests syntect/src/parsing/syntax_definition.rs`)
-- **Lint issues:** 2
 
-### 6. parsing.scope
+### 7. parsing.scope
 
-- **Target:** `parsing.Scope [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.Scope`
 - **Similarity:** 0.48
 - **Dependents:** 1
 - **Priority Score:** 1124605.1
@@ -122,15 +108,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 9/12 matched (target 17)
 - **Missing types:** `Err`, `ScopeVisitor`, `Value`
 - **Tests:** 5/5 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/scope.rs` vs expected `parsing/scope.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/scope.rs` vs expected `parsing/scope.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/scope.rs` (current: `// port-lint: source syntect/src/parsing/scope.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/scope.rs` (current: `// port-lint: tests syntect/src/parsing/scope.rs`)
-- **Lint issues:** 2
 
-### 7. parsing.yaml_load
+### 8. parsing.yaml_load
 
-- **Target:** `parsing.YamlLoad [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.YamlLoad`
 - **Similarity:** 0.14
 - **Dependents:** 0
 - **Priority Score:** 284308.6
@@ -139,15 +120,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/7 matched (target 2)
 - **Missing types:** `ParserState`, `ContextNamer`, `RegexRewriterForNewlines`, `RegexRewriterForNoNewlines`, `ConsumingCaptureIndexParser`, `Parser`
 - **Tests:** 13/13 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/yaml_load.rs` vs expected `parsing/yaml_load.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/yaml_load.rs` vs expected `parsing/yaml_load.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/yaml_load.rs` (current: `// port-lint: source syntect/src/parsing/yaml_load.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/yaml_load.rs` (current: `// port-lint: tests syntect/src/parsing/yaml_load.rs`)
-- **Lint issues:** 2
 
-### 8. parsing.metadata
+### 9. parsing.metadata
 
-- **Target:** `parsing.Metadata [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.Metadata`
 - **Similarity:** 0.14
 - **Dependents:** 0
 - **Priority Score:** 263708.6
@@ -156,15 +132,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 4/11 matched (target 7)
 - **Missing types:** `Dict`, `SelectorString`, `RawMetadataEntry`, `LoadMetadata`, `KeyPair`, `ShellVars`, `MetaSetSerializable`
 - **Tests:** 5/6 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/metadata.rs` vs expected `parsing/metadata.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/metadata.rs` vs expected `parsing/metadata.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/metadata.rs` (current: `// port-lint: source syntect/src/parsing/metadata.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/metadata.rs` (current: `// port-lint: tests syntect/src/parsing/metadata.rs`)
-- **Lint issues:** 2
 
-### 9. highlighting.style
+### 10. highlighting.style
 
-- **Target:** `highlighting.Style [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.Style`
 - **Similarity:** 0.21
 - **Dependents:** 0
 - **Priority Score:** 223807.9
@@ -172,15 +143,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt`, `bits`, `from_bits`, `from_bits_truncate`, `from_bits_unchecked`, `intersects`, `insert`, `remove`, `toggle`, `set`, `bitor`, `bitor_assign`, `bitxor`, `bitxor_assign`, `bitand`, `bitand_assign`, `sub`, `sub_assign`, `not`, `extend`, `from_iter`
 - **Types:** 4/5 matched (target 6)
 - **Missing types:** `Output`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/style.rs` vs expected `highlighting/style.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/highlighting/style.rs` vs expected `highlighting/style.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/style.rs` (current: `// port-lint: source syntect/src/highlighting/style.rs`)
-- **Proposed provenance header:** `// port-lint: tests highlighting/style.rs` (current: `// port-lint: tests syntect/src/highlighting/style.rs`)
-- **Lint issues:** 2
 
-### 10. parsing.parser
+### 11. parsing.parser
 
-- **Target:** `parsing.Parser [PROVENANCE-FALLBACK]`
+- **Target:** `parsing.Parser`
 - **Similarity:** 0.34
 - **Dependents:** 0
 - **Priority Score:** 186106.6
@@ -189,15 +155,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/5 matched (target 3)
 - **Missing types:** `ParsingError`, `StateLevel`, `RegexMatch`, `SearchCache`
 - **Tests:** 41/48 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/parsing/parser.rs` vs expected `parsing/parser.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/parsing/parser.rs` vs expected `parsing/parser.rs`
-- **Proposed provenance header:** `// port-lint: source parsing/parser.rs` (current: `// port-lint: source syntect/src/parsing/parser.rs`)
-- **Proposed provenance header:** `// port-lint: tests parsing/parser.rs` (current: `// port-lint: tests syntect/src/parsing/parser.rs`)
-- **Lint issues:** 2
 
-### 11. dumps
+### 12. syntect.dumps
 
-- **Target:** `syntect.Dumps [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `syntect.Dumps [STUB]`
 - **Similarity:** 0.09
 - **Dependents:** 0
 - **Priority Score:** 141709.1
@@ -206,15 +167,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 - **Tests:** 3/3 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/dumps.rs` vs expected `dumps.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/dumps.rs` vs expected `dumps.rs`
-- **Proposed provenance header:** `// port-lint: source dumps.rs` (current: `// port-lint: source syntect/src/dumps.rs`)
-- **Proposed provenance header:** `// port-lint: tests dumps.rs` (current: `// port-lint: tests syntect/src/dumps.rs`)
-- **Lint issues:** 2
 
-### 12. util
+### 13. syntect.util
 
-- **Target:** `util.Util [PROVENANCE-FALLBACK]`
+- **Target:** `util.Util`
 - **Similarity:** 0.38
 - **Dependents:** 0
 - **Priority Score:** 81506.2
@@ -223,15 +179,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched
 - **Missing types:** `LinesWithEndings`, `Item`
 - **Tests:** 3/4 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/util.rs` vs expected `util.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/util.rs` vs expected `util.rs`
-- **Proposed provenance header:** `// port-lint: source util.rs` (current: `// port-lint: source syntect/src/util.rs`)
-- **Proposed provenance header:** `// port-lint: tests util.rs` (current: `// port-lint: tests syntect/src/util.rs`)
-- **Lint issues:** 2
 
-### 13. html
+### 14. syntect.html
 
-- **Target:** `html.Html [PROVENANCE-FALLBACK]`
+- **Target:** `html.Html`
 - **Similarity:** 0.44
 - **Dependents:** 0
 - **Priority Score:** 63105.6
@@ -240,15 +191,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/3 matched (target 11)
 - **Missing types:** _none_
 - **Tests:** 9/9 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/html.rs` vs expected `html.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/html.rs` vs expected `html.rs`
-- **Proposed provenance header:** `// port-lint: source html.rs` (current: `// port-lint: source syntect/src/html.rs`)
-- **Proposed provenance header:** `// port-lint: tests html.rs` (current: `// port-lint: tests syntect/src/html.rs`)
-- **Lint issues:** 2
 
-### 14. easy
+### 15. syntect.easy
 
-- **Target:** `easy.HighlightLines [PROVENANCE-FALLBACK]`
+- **Target:** `easy.HighlightLines`
 - **Similarity:** 0.47
 - **Dependents:** 0
 - **Priority Score:** 41605.3
@@ -257,15 +203,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/5 matched (target 7)
 - **Missing types:** `HighlightFile`, `Item`
 - **Tests:** 5/5 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/easy.rs` vs expected `easy.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/easy.rs` vs expected `easy.rs`
-- **Proposed provenance header:** `// port-lint: source easy.rs` (current: `// port-lint: source syntect/src/easy.rs`)
-- **Proposed provenance header:** `// port-lint: tests easy.rs` (current: `// port-lint: tests syntect/src/easy.rs`)
-- **Lint issues:** 2
 
-### 15. highlighting.theme_load
+### 16. highlighting.theme_load
 
-- **Target:** `highlighting.ThemeLoad [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.ThemeLoad [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 40510.0
@@ -273,13 +214,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from_str`, `parse_settings`
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `Err`, `Error`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/theme_load.rs` vs expected `highlighting/theme_load.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/theme_load.rs` (current: `// port-lint: source syntect/src/highlighting/theme_load.rs`)
-- **Lint issues:** 1
 
-### 16. highlighting.settings
+### 17. highlighting.settings
 
-- **Target:** `highlighting.Settings [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.Settings [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 30410.0
@@ -287,13 +225,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from`, `read_plist`
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `ParseSettings`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/settings.rs` vs expected `highlighting/settings.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/settings.rs` (current: `// port-lint: source syntect/src/highlighting/settings.rs`)
-- **Lint issues:** 1
 
-### 17. highlighting.highlighter
+### 18. highlighting.highlighter
 
-- **Target:** `highlighting.Highlighter [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.Highlighter`
 - **Similarity:** 0.58
 - **Dependents:** 0
 - **Priority Score:** 22104.2
@@ -302,15 +237,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 5/6 matched (target 11)
 - **Missing types:** `Item`
 - **Tests:** 4/4 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/highlighter.rs` vs expected `highlighting/highlighter.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/highlighting/highlighter.rs` vs expected `highlighting/highlighter.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/highlighter.rs` (current: `// port-lint: source syntect/src/highlighting/highlighter.rs`)
-- **Proposed provenance header:** `// port-lint: tests highlighting/highlighter.rs` (current: `// port-lint: tests syntect/src/highlighting/highlighter.rs`)
-- **Lint issues:** 2
 
-### 18. highlighting.selector
+### 19. highlighting.selector
 
-- **Target:** `highlighting.Selector [PROVENANCE-FALLBACK]`
+- **Target:** `highlighting.Selector`
 - **Similarity:** 0.52
 - **Dependents:** 0
 - **Priority Score:** 21104.8
@@ -319,15 +249,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/3 matched
 - **Missing types:** `Err`
 - **Tests:** 4/4 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/highlighting/selector.rs` vs expected `highlighting/selector.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:syntect/src/highlighting/selector.rs` vs expected `highlighting/selector.rs`
-- **Proposed provenance header:** `// port-lint: source highlighting/selector.rs` (current: `// port-lint: source syntect/src/highlighting/selector.rs`)
-- **Proposed provenance header:** `// port-lint: tests highlighting/selector.rs` (current: `// port-lint: tests syntect/src/highlighting/selector.rs`)
-- **Lint issues:** 2
 
-### 19. utils
+### 20. syntect.utils
 
-- **Target:** `util.Utils [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `util.Utils [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10110.0
@@ -335,9 +260,28 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `walk_dir`
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `syntect/src/utils.rs` vs expected `utils.rs`
-- **Proposed provenance header:** `// port-lint: source utils.rs` (current: `// port-lint: source syntect/src/utils.rs`)
-- **Lint issues:** 1
+
+### 21. parsing.mod
+
+- **Target:** `parsing.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 22. highlighting.mod
+
+- **Target:** `highlighting.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
 
 ## Success Criteria
 
@@ -359,8 +303,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `highlighting.theme` | `highlighting.Theme` | `highlighting/theme` |
-| `lib` | `syntect.Mod` | `lib` |
-| `parsing.mod` | `parsing.Mod` | `parsing/mod` |
-| `highlighting.mod` | `highlighting.Mod` | `highlighting/mod` |
+| `syntect.lib` | `syntect.Mod` | `syntect/src/lib` |
 
