@@ -17,11 +17,19 @@
   },
   "reexport_modules": [
     "lib",
+    "lib.rs",
+    "syntect/src/lib.rs",
     "parsing/mod",
     "parsing.mod",
+    "parsing/mod.rs",
+    "syntect/src/parsing/mod.rs",
     "highlighting/mod",
     "highlighting.mod",
+    "highlighting/mod.rs",
+    "syntect/src/highlighting/mod.rs",
     "highlighting/theme",
-    "highlighting.theme"
+    "highlighting.theme",
+    "highlighting/theme.rs",
+    "syntect/src/highlighting/theme.rs"
   ]
 }
