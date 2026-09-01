@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/parsing/yaml_load.rs
+// port-lint: source parsing/yaml_load.rs
 package io.github.kotlinmania.syntect.parsing
 
 import io.github.kotlinmania.syntect.ParsingException

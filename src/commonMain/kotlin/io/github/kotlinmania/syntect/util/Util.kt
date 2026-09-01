@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/util.rs
+// port-lint: source util.rs
 package io.github.kotlinmania.syntect.util
 
 import io.github.kotlinmania.syntect.highlighting.Color

@@ -1,4 +1,4 @@
-// port-lint: tests syntect/src/parsing/syntax_definition.rs
+// port-lint: tests parsing/syntax_definition.rs
 package io.github.kotlinmania.syntect
 
 import io.github.kotlinmania.syntect.parsing.ContextId

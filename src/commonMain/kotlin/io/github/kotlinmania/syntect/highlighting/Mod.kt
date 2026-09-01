@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/highlighting/mod.rs
+// port-lint: source highlighting/mod.rs
 package io.github.kotlinmania.syntect.highlighting
 
 /**

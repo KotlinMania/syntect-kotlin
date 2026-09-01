@@ -2,7 +2,7 @@
   "type": "port",
   "name": "syntect-kotlin",
   "source": {
-    "path": "tmp",
+    "path": "tmp/syntect/src",
     "lang": "rust"
   },
   "target": {

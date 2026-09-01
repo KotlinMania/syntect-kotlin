@@ -1,4 +1,4 @@
-// port-lint: source syntect/src/parsing/syntax_definition.rs
+// port-lint: source parsing/syntax_definition.rs
 package io.github.kotlinmania.syntect.parsing
 
 /**
