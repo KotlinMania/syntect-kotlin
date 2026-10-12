@@ -6,8 +6,11 @@ import io.github.kotlinmania.syntect.highlighting.FontStyle
 import io.github.kotlinmania.syntect.highlighting.HighlightedSegment
 import io.github.kotlinmania.syntect.highlighting.Style
 import io.github.kotlinmania.syntect.highlighting.StyleModifier
+import io.github.kotlinmania.syntect.util.LinesWithEndings
 import io.github.kotlinmania.syntect.util.as24BitTerminalEscaped
+import io.github.kotlinmania.syntect.util.asLatexEscaped
 import io.github.kotlinmania.syntect.util.blendFgColor
+import io.github.kotlinmania.syntect.util.debugPrintOps
 import io.github.kotlinmania.syntect.util.linesWithEndings
 import io.github.kotlinmania.syntect.util.modifyRange
 import io.github.kotlinmania.syntect.util.splitAt
