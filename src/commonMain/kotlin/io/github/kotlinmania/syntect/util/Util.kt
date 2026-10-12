@@ -119,7 +119,7 @@ fun debugPrintOps(line: String, ops: List<ParseOp>) {
  */
 class LinesWithEndings(
     private val input: String,
-) : Iterable<String>, Sequence<String> {
+) : Iterable<String> {
     override fun iterator(): Iterator<String> = linesWithEndings(input).iterator()
 
     companion object {
