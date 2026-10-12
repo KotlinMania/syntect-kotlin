@@ -6,6 +6,9 @@ import io.github.kotlinmania.syntect.highlighting.FontStyle
 import io.github.kotlinmania.syntect.highlighting.HighlightedSegment
 import io.github.kotlinmania.syntect.highlighting.Style
 import io.github.kotlinmania.syntect.highlighting.StyleModifier
+import io.github.kotlinmania.syntect.parsing.ParseOp
+import io.github.kotlinmania.syntect.parsing.Scope
+import io.github.kotlinmania.syntect.parsing.ScopeStackOp
 import io.github.kotlinmania.syntect.util.LinesWithEndings
 import io.github.kotlinmania.syntect.util.as24BitTerminalEscaped
 import io.github.kotlinmania.syntect.util.asLatexEscaped
@@ -132,7 +135,7 @@ class UtilTest {
             )
 
         val single = listOf(HighlightedSegment(style1, "hello {world}\\"))
-        val escapedSingle = io.github.kotlinmania.syntect.util.asLatexEscaped(single)
+        val escapedSingle = asLatexEscaped(single)
         assertEquals("\\textcolor[RGB]{255,50,100}{hello \\{world\\}\\\\}", escapedSingle)
 
         val multi =
@@ -140,7 +143,7 @@ class UtilTest {
                 HighlightedSegment(style1, "fn "),
                 HighlightedSegment(style2, "main()"),
             )
-        val escapedMulti = io.github.kotlinmania.syntect.util.asLatexEscaped(multi)
+        val escapedMulti = asLatexEscaped(multi)
         assertEquals(
             "\\textcolor[RGB]{255,50,100}{fn }\\textcolor[RGB]{10,30,20}{main()}",
             escapedMulti,
@@ -151,17 +154,9 @@ class UtilTest {
     fun testDebugPrintOps() {
         val ops =
             listOf(
-                io.github.kotlinmania.syntect.parsing.ParseOp(
-                    0,
-                    io.github.kotlinmania.syntect.parsing.ScopeStackOp.Push(
-                        io.github.kotlinmania.syntect.parsing.Scope.new("source.kotlin"),
-                    ),
-                ),
-                io.github.kotlinmania.syntect.parsing.ParseOp(
-                    4,
-                    io.github.kotlinmania.syntect.parsing.ScopeStackOp.Pop(1),
-                ),
+                ParseOp(0, ScopeStackOp.Push(Scope.new("source.kotlin"))),
+                ParseOp(4, ScopeStackOp.Pop(1)),
             )
-        io.github.kotlinmania.syntect.util.debugPrintOps("val x = 1", ops)
+        debugPrintOps("val x = 1", ops)
     }
 }

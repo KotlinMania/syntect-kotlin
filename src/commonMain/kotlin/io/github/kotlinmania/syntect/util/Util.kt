@@ -61,6 +61,7 @@ val LATEX_REPLACE: List<Pair<String, String>> =
 fun asLatexEscaped(v: List<HighlightedSegment>): String {
     val s = StringBuilder()
     var prevStyle: Style? = null
+
     fun textcolor(style: Style, first: Boolean): String {
         val prefix = if (first) "" else "}"
         return "$prefix\\textcolor[RGB]{${style.foreground.r},${style.foreground.b},${style.foreground.g}}{"
