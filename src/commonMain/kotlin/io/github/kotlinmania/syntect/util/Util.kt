@@ -3,7 +3,10 @@ package io.github.kotlinmania.syntect.util
 
 import io.github.kotlinmania.syntect.highlighting.Color
 import io.github.kotlinmania.syntect.highlighting.HighlightedSegment
+import io.github.kotlinmania.syntect.highlighting.Style
 import io.github.kotlinmania.syntect.highlighting.StyleModifier
+import io.github.kotlinmania.syntect.parsing.ParseOp
+import io.github.kotlinmania.syntect.parsing.ScopeStackOp
 
 /**
  * Blends a foreground color with transparency over a background color.
@@ -41,6 +44,87 @@ fun as24BitTerminalEscaped(
         sb.append(text)
     }
     return sb.toString()
+}
+
+val LATEX_REPLACE: List<Pair<String, String>> =
+    listOf(
+        Pair("\\", "\\\\"),
+        Pair("{", "\\{"),
+        Pair("}", "\\}"),
+    )
+
+/**
+ * Formats the styled fragments using LaTeX textcolor directive.
+ *
+ * Background color is ignored.
+ */
+fun asLatexEscaped(v: List<HighlightedSegment>): String {
+    val s = StringBuilder()
+    var prevStyle: Style? = null
+    fun textcolor(style: Style, first: Boolean): String {
+        val prefix = if (first) "" else "}"
+        return "$prefix\\textcolor[RGB]{${style.foreground.r},${style.foreground.b},${style.foreground.g}}{"
+    }
+    for (segment in v) {
+        val style = segment.style
+        val text = segment.text
+        if (prevStyle != null) {
+            when (text) {
+                " " -> {
+                    s.append(' ')
+                    continue
+                }
+                "\n" -> continue
+                else -> Unit
+            }
+            if (style != prevStyle) {
+                s.append(textcolor(style, false))
+            }
+        } else {
+            s.append(textcolor(style, true))
+        }
+        var content = text
+        for (replacement in LATEX_REPLACE) {
+            content = content.replace(replacement.first, replacement.second)
+        }
+        s.append(content)
+        prevStyle = style
+    }
+    s.append('}')
+    return s.toString()
+}
+
+/**
+ * Print out the various push and pop operations in a list
+ * with visual alignment to the line.
+ */
+fun debugPrintOps(line: String, ops: List<ParseOp>) {
+    for (entry in ops) {
+        val i = entry.offset
+        val op = entry.op
+        println(line.trimEnd())
+        print("".padEnd(i))
+        when (op) {
+            is ScopeStackOp.Push -> println("^ +${op.scope}")
+            is ScopeStackOp.Pop -> println("^ pop ${op.count}")
+            is ScopeStackOp.Clear -> println("^ clear ${op.amount}")
+            is ScopeStackOp.Restore -> println("^ restore")
+            is ScopeStackOp.Noop -> println("noop")
+        }
+    }
+}
+
+/**
+ * An iterator over the lines of a string, including the line endings.
+ */
+class LinesWithEndings(
+    private val input: String,
+) : Iterable<String>, Sequence<String> {
+    override fun iterator(): Iterator<String> = linesWithEndings(input).iterator()
+
+    companion object {
+        fun from(input: String): LinesWithEndings = LinesWithEndings(input)
+    }
 }
 
 /**
