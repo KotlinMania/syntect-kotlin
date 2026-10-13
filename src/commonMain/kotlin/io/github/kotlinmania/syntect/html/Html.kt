@@ -68,7 +68,7 @@ class ClassedHTMLGenerator(
     }
 
     fun finalize(): String {
-        for (i in 0 until openSpans) {
+        repeat(openSpans) {
             htmlBuilder.append("</span>")
         }
         return htmlBuilder.toString()
