@@ -139,6 +139,7 @@ class ScopeRegionIterator(
     override fun hasNext(): Boolean = rangeIter.hasNext()
 
     override fun next(): ScopeRegionItem {
+        if (!hasNext()) throw NoSuchElementException()
         val (range, op) = rangeIter.next()
         val text = line.substring(range.first, range.last + 1)
         return ScopeRegionItem(text, op)

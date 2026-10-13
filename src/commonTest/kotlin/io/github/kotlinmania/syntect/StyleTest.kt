@@ -41,13 +41,14 @@ class StyleTest {
         val italic = FontStyle.ITALIC
         val underline = FontStyle.UNDERLINE
 
-        assertTrue(bold.contains(FontStyle.BOLD))
-        assertFalse(bold.contains(FontStyle.ITALIC))
+        assertTrue(bold.contains(bold))
+        assertFalse(bold.contains(italic))
+        assertTrue(underline.contains(underline))
 
         val combined = bold.union(italic)
-        assertTrue(combined.contains(FontStyle.BOLD))
-        assertTrue(combined.contains(FontStyle.ITALIC))
-        assertFalse(combined.contains(FontStyle.UNDERLINE))
+        assertTrue(combined.contains(bold))
+        assertTrue(combined.contains(italic))
+        assertFalse(combined.contains(underline))
 
         val diff = combined.difference(bold)
         assertEquals(FontStyle.ITALIC, diff)
